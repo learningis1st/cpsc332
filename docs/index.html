@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yijia Chen - CPSC 332</title>
+    <style>
+        body {
+            background-color: lightgray;
+        }
+
+        h1 {
+            color: darkblue;
+            text-align: center;
+        }
+
+        p {
+            font-family: Arial, sans-serif;
+            color: black;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: darkblue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>HW1 - Submission by Yijia Chen</h1>
+
+    <p>
+        I am excited to take this course because I hope to <em>gain a deeper understanding</em> of 
+        web development and learn how to build <strong>modern, interactive websites</strong>. I am particularly 
+        looking forward to learning more about JavaScript and improving my CSS skills.
+    </p>
+
+    <img src="meme.jpg" alt="A meme from r/networkingmemes" width="400">
+
+    <p>
+        Image source: <a href="https://www.reddit.com/r/networkingmemes/comments/1eyssc9/its_not_real/" target="_blank" alt="Link to r/networkingmemes">Link</a>
+    </p>
+
+    <button onclick="changeText()">Click me to see something cool!</button>
+
+    <script>
+        function changeText() {
+            // Change the content of the paragraph when the button is clicked
+            document.querySelector('p').innerHTML = "You've just changed this text using JavaScript!";
+        }
+    </script>
+
+</body>
+</html>
