@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="outside-border">
+
+    <h1>Guess the Number</h1>
+
+    <hr>
+
+    <div>
+        <label for="min-value">Min:</label>
+        <input type="number" id="min-value" value="1">
+        <label for="max-value">Max:</label>
+        <input type="number" id="max-value" value="10">
+    </div>
+
+    <div>
+        <label for="guess-input">Guess:</label>
+        <input type="number" id="guess-input" placeholder="Enter your guess">
+    </div>
+
+    <div>
+        <button id="guess-button">Submit Guess</button>
+    </div>
+
+    <div>
+        <p id="message"></p>
+    </div>
+    <hr>
+</div>
+
+<script>
+    let randomNumber;
+    let guesses = 3;
+    let won = false;
+
+    const minValueInput = document.getElementById('min-value');
+    const maxValueInput = document.getElementById('max-value');
+    const guessInput = document.getElementById('guess-input');
+    const guessButton = document.getElementById('guess-button');
+    const message = document.getElementById('message');
+
+    function generateRandomNumber() {
+        const min = parseInt(minValueInput.value);
+        const max = parseInt(maxValueInput.value);
+        randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        minValueInput.disabled = true;
+        maxValueInput.disabled = true;
+    }
+
+    guessInput.addEventListener('input', filterNonNumeric);
+
+    function filterNonNumeric(event) {
+        guessInput.value = guessInput.value.replace(/[^0-9]/g, '');
+    }
+
+    guessButton.addEventListener('click', checkGuess);
+
+    function checkGuess() {
+        let guess = parseInt(guessInput.value);
+
+        if (isNaN(guess)) {
+            message.innerHTML = 'Please enter a valid number.';
+            return;
+        }
+
+        const min = parseInt(minValueInput.value);
+        const max = parseInt(maxValueInput.value);
+
+        if (guess < min || guess > max) {
+            message.innerHTML = `Please enter a number between ${min} and ${max}.`;
+            return;
+        }
+
+        if (guess === randomNumber) {
+            won = true;
+            gameOver();
+        } else {
+            guesses--;
+            if (guesses === 0) {
+                gameOver();
+            } else {
+                message.innerHTML = `Too ${guess > randomNumber ? 'high' : 'low'}. You have ${guesses} guesses left.`;
+            }
+        }
+    }
+
+    function gameOver() {
+        if (won) {
+            message.innerHTML = 'Congratulations! You guessed the correct number.';
+        } else {
+            message.innerHTML = `Game Over. The correct number was ${randomNumber}.`;
+        }
+
+        guessInput.disabled = true;
+        guessButton.disabled = true;
+
+        const resetButton = document.createElement('button');
+        resetButton.innerHTML = 'Play Again';
+        resetButton.id = 'reset-button';
+        resetButton.addEventListener('click', resetGame);
+        document.body.appendChild(resetButton);
+    }
+
+    function resetGame() {
+        generateRandomNumber();
+        guesses = 3;
+        won = false;
+
+        guessInput.disabled = false;
+        guessButton.disabled = false;
+        message.innerHTML = '';
+
+        minValueInput.disabled = false;
+        maxValueInput.disabled = false;
+
+        const resetButton = document.getElementById('reset-button');
+        document.body.removeChild(resetButton);
+    }
+
+    generateRandomNumber();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+body {
+    margin: auto;
+    max-width: 600px;
+    text-align: center;
+    padding: 15px;
+}
+
+body>div>div {
+    margin: 15px;
+}
+
+#guess-input {
+    width: 125px;
+}
+
+.outside-border {
+    border: 5px dotted rgb(0, 72, 255);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
